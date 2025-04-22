@@ -1,0 +1,35 @@
+name: Lint and Prettier Check
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install Frontend Dependencies and Run Checks
+        run: |
+          cd frontend
+          npm install
+          npm run lint
+          npm run format
+
+      - name: Install Backend Dependencies and Run Checks
+        run: |
+          cd backend
+          npm install
+          npm run lint
+          npm run format
