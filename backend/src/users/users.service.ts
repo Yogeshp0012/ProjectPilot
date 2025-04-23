@@ -14,15 +14,10 @@ export class UsersService {
     hashedPassword: string;
   }) {
     try {
-      const { firstName, lastName, displayName, emailAddress, hashedPassword } =
-        userData;
+      const { firstName, lastName, displayName, emailAddress, hashedPassword } = userData;
 
       // Check if the user already exists
-      const existingUser = await db
-        .select()
-        .from(users)
-        .where(eq(users.emailAddress, emailAddress))
-        .limit(1);
+      const existingUser = await db.select().from(users).where(eq(users.emailAddress, emailAddress)).limit(1);
 
       if (existingUser.length > 0) {
         // Return the error message directly when user exists
@@ -56,11 +51,7 @@ export class UsersService {
   }
 
   async getUserByEmail(email: string) {
-    const result = await db
-      .select()
-      .from(users)
-      .where(eq(users.emailAddress, email))
-      .limit(1);
+    const result = await db.select().from(users).where(eq(users.emailAddress, email)).limit(1);
 
     return result[0] || null;
   }

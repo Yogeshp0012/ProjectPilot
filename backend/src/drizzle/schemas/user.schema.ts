@@ -1,11 +1,4 @@
-// @ts-check
-import {
-  pgTable,
-  serial,
-  varchar,
-  timestamp,
-  boolean,
-} from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, timestamp, boolean } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   userId: serial('user_id').primaryKey(),
