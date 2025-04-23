@@ -1,13 +1,13 @@
-import {drizzle} from 'drizzle-orm/node-postgres'
-import {Pool} from 'pg';
-import * as dotenv from 'dotenv'
+import { config } from 'dotenv';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import * as postgres from 'postgres';
 
-dotenv.config()
+config({ path: '.env' });
 
-const pool = new Pool({
-    connectionString : process.env.DATABASE_URL,
-    ssl : {
-        rejectUnauthorized: false,}
-})
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not defined in the environment variables.');
+}
 
-export const db = drizzle(pool)
+const client = postgres(process.env.DATABASE_URL);
+
+export const db = drizzle({ client });
