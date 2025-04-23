@@ -1,4 +1,11 @@
-import { IsString, IsEmail, IsNotEmpty, Length } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsNotEmpty,
+  Length,
+  IsOptional,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -19,6 +26,29 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  @Length(8)  
+  @Length(8)
   hashedPassword: string;
+
+  @IsOptional()
+  @IsString()
+  activeWorkspaceId?: string;
+
+  @IsOptional()
+  @IsString()
+  profilePictureUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  userType?: string;
+
+  @IsOptional()
+  emailVerifiedAt?: Date;
+
+  @IsOptional()
+  @IsString()
+  preferredLanguage?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isLoginEnabled?: boolean;
 }
