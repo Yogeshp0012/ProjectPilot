@@ -11,10 +11,10 @@ export class UsersService {
     lastName: string;
     displayName: string;
     emailAddress: string;
-    hashedPassword: string;
+    password: string;
   }) {
     try {
-      const { firstName, lastName, displayName, emailAddress, hashedPassword } = userData;
+      const { firstName, lastName, displayName, emailAddress, password } = userData;
 
       // Check if the user already exists
       const existingUser = await db.select().from(users).where(eq(users.emailAddress, emailAddress)).limit(1);
@@ -26,7 +26,7 @@ export class UsersService {
 
       // Hash the password before storing it
       const salt = await bcrypt.genSalt(10); // Generate salt
-      const hashedPasswordWithSalt = await bcrypt.hash(hashedPassword, salt);
+      const hashedPasswordWithSalt = await bcrypt.hash(password, salt);
 
       const [newUser] = await db
         .insert(users)
