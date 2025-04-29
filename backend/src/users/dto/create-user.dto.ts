@@ -20,7 +20,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @Length(8)
-  hashedPassword: string;
+  password: string;
 
   @IsOptional()
   @IsString()
